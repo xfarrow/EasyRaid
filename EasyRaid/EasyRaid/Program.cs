@@ -1,7 +1,5 @@
 ﻿using CommandLine;
-using System.IO;
 using System.Text.Json;
-using static EasyRaid.CommandLineOptions;
 
 namespace EasyRaid
 {
@@ -120,31 +118,109 @@ namespace EasyRaid
 
         private static void OnChanged(object sender, FileSystemEventArgs e, ConfigurationFile configuration)
         {
-            string relativePath = Path.GetRelativePath(configuration.Destination, e.FullPath);
-            string fullPath = Path.Combine(configuration.Destination, relativePath);
-            File.Copy(fullPath, configuration.Destination, true);
+            if (e.Name == null)
+            {
+                return;
+            }
+
+            string destinationPath = Path.Combine(configuration.Destination, e.Name);
+            if (!Directory.Exists(Path.GetDirectoryName(destinationPath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(destinationPath) ?? ".");
+            }
+            FileAttributes attr = File.GetAttributes(e.FullPath);
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                CopyDirectory(e.FullPath, Path.Combine(destinationPath, e.Name), true);
+            }
+            else
+            {
+                File.Copy(e.FullPath, destinationPath, true);
+            }
         }
 
         private static void OnCreated(object sender, FileSystemEventArgs e, ConfigurationFile configuration)
         {
-            string relativePath = Path.GetRelativePath(configuration.Destination, e.FullPath);
-            string fullPath = Path.Combine(configuration.Destination, relativePath);
-            File.Copy(fullPath, configuration.Destination, true);
+            if (e.Name == null)
+            {
+                return;
+            }
+
+            string destinationPath = Path.Combine(configuration.Destination, e.Name);
+            if (!Directory.Exists(Path.GetDirectoryName(destinationPath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(destinationPath) ?? ".");
+            }
+            FileAttributes attr = File.GetAttributes(e.FullPath);
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                CopyDirectory(e.FullPath, Path.Combine(destinationPath, e.Name), true);
+            }
+            else
+            {
+                File.Copy(e.FullPath, destinationPath, true);
+            }
         }
 
         private static void OnDeleted(object sender, FileSystemEventArgs e, ConfigurationFile configuration)
         {
-            string relativePath = Path.GetRelativePath(configuration.Destination, e.FullPath);
-            string fullPath = Path.Combine(configuration.Destination, relativePath);
-            File.Delete(fullPath);
+            if (e.Name == null)
+            {
+                return;
+            }
+            string destinationPath = Path.Combine(configuration.Destination, e.Name);
+            FileAttributes attr = File.GetAttributes(e.FullPath);
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                Directory.Delete(destinationPath, true);
+            }
+            else
+            {
+                File.Delete(destinationPath);
+            }
         }
 
         private static void OnRenamed(object sender, RenamedEventArgs e, ConfigurationFile configuration)
         {
-            string relativePath = Path.GetRelativePath(configuration.Destination, e.FullPath);
-            string fullPath = Path.Combine(configuration.Destination, relativePath);
-            File.Move(fullPath, Path.Combine(Path.GetDirectoryName(e.FullPath), e.Name));
-            Console.WriteLine($"File renamed from {e.OldFullPath} to {e.FullPath} -  {e.ChangeType}");
+            if(e.OldName == null || e.Name == null)
+            {
+                return;
+            }
+            string oldPath = Path.Combine(configuration.Destination, e.OldName);
+            string newPath = Path.Combine(configuration.Destination, e.Name);
+            Directory.Move(oldPath, newPath);
+
+            //FileAttributes attr = File.GetAttributes(e.FullPath);
+            //if (attr.HasFlag(FileAttributes.Directory))
+            //{
+            //}
+            //else
+            //{
+            //    File.Move(oldPath, newPath);
+            //}
+
+        }
+
+        static void CopyDirectory(string sourceDir, string destinationDir, bool overwrite)
+        {
+            // Crea la cartella di destinazione se non esiste
+            Directory.CreateDirectory(destinationDir);
+
+            // Copia tutti i file nella cartella corrente
+            foreach (string filePath in Directory.GetFiles(sourceDir))
+            {
+                string fileName = Path.GetFileName(filePath);
+                string destFilePath = Path.Combine(destinationDir, fileName);
+                File.Copy(filePath, destFilePath, overwrite);
+            }
+
+            // Copia ricorsivamente le sottocartelle
+            foreach (string subDir in Directory.GetDirectories(sourceDir))
+            {
+                string folderName = Path.GetFileName(subDir);
+                string destSubDir = Path.Combine(destinationDir, folderName);
+                CopyDirectory(subDir, destSubDir, overwrite);
+            }
         }
     }
 }
