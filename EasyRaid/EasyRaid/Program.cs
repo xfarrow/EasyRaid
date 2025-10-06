@@ -181,28 +181,23 @@ namespace EasyRaid
 
         private static void OnRenamed(object sender, RenamedEventArgs e, ConfigurationFile configuration)
         {
-            if(e.OldName == null || e.Name == null)
+            if (e.OldName == null || e.Name == null)
             {
                 return;
             }
             string oldPath = Path.Combine(configuration.Destination, e.OldName);
             string newPath = Path.Combine(configuration.Destination, e.Name);
             Directory.Move(oldPath, newPath);
-
-            //FileAttributes attr = File.GetAttributes(e.FullPath);
-            //if (attr.HasFlag(FileAttributes.Directory))
-            //{
-            //}
-            //else
-            //{
-            //    File.Move(oldPath, newPath);
-            //}
-
         }
 
+        /// <summary>
+        /// Copy recursively a directory
+        /// </summary>
+        /// <param name="sourceDir"></param>
+        /// <param name="destinationDir"></param>
+        /// <param name="overwrite"></param>
         static void CopyDirectory(string sourceDir, string destinationDir, bool overwrite)
         {
-            // Crea la cartella di destinazione se non esiste
             Directory.CreateDirectory(destinationDir);
 
             // Copia tutti i file nella cartella corrente
