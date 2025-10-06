@@ -1,0 +1,6 @@
+C:\Users\Alessandro\Desktop\EasyRaid\EasyRaid.exe
+C:\Users\Alessandro\Desktop\EasyRaid\EasyRaid.dll
+C:\Users\Alessandro\Desktop\EasyRaid\EasyRaid.deps.json
+C:\Users\Alessandro\Desktop\EasyRaid\EasyRaid.runtimeconfig.json
+C:\Users\Alessandro\Desktop\EasyRaid\EasyRaid.pdb
+C:\Users\Alessandro\Desktop\EasyRaid\CommandLine.dll
