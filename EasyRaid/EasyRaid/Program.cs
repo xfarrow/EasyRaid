@@ -75,8 +75,6 @@ namespace EasyRaid
 
                 });
 
-
-
             ConfigurationFile? configuration = JsonSerializer.Deserialize<ConfigurationFile>(File.ReadAllText(configurationFilePath));
             if (configuration == null)
             {
@@ -84,48 +82,69 @@ namespace EasyRaid
                 return 0;
             }
 
-            using (FileSystemWatcher watcher = new FileSystemWatcher())
+            using FileSystemWatcher watcher = new FileSystemWatcher();
+            watcher.IncludeSubdirectories = true;
+            watcher.Path = configuration.Source;
+            watcher.Filter = "*"; // Monitor everything (TODO: maybe allow to specify which files to include/exclude ?)
+
+            // Watch for changes
+            watcher.NotifyFilter = NotifyFilters.LastWrite |
+                                   NotifyFilters.LastAccess |
+                                   NotifyFilters.FileName |
+                                   NotifyFilters.DirectoryName;
+
+            watcher.Changed += (sender, e) =>
             {
-                watcher.Path = configuration.Source;
-                watcher.Filter = "*"; // Monitor all
+                OnChanged(sender, e, configuration);
+            };
 
-                // Watch for changes
-                watcher.NotifyFilter = NotifyFilters.LastWrite |
-                                       NotifyFilters.LastAccess |
-                                       NotifyFilters.FileName |
-                                       NotifyFilters.DirectoryName;
+            watcher.Created += (sender, e) =>
+            {
+                OnCreated(sender, e, configuration);
+            };
+            watcher.Deleted += (sender, e) =>
+            {
+                OnDeleted(sender, e, configuration);
+            };
+            watcher.Renamed += (sender, e) =>
+            {
+                OnRenamed(sender, e, configuration);
+            }; ;
 
-                watcher.Changed += OnChanged;
-                watcher.Created += OnCreated;
-                watcher.Deleted += OnDeleted;
-                watcher.Renamed += OnRenamed;
+            // Begin watching
+            watcher.EnableRaisingEvents = true;
 
-                // Begin watching
-                watcher.EnableRaisingEvents = true;
-
-                while (Console.Read() != 'q');
-                return 0;
-            }
+            while (Console.Read() != 'q') ;
+            return 0;
         }
 
-        private static void OnChanged(object sender, FileSystemEventArgs e)
+        private static void OnChanged(object sender, FileSystemEventArgs e, ConfigurationFile configuration)
         {
-            Console.WriteLine($"File changed: {e.FullPath} {e.ChangeType}");
+            string relativePath = Path.GetRelativePath(configuration.Destination, e.FullPath);
+            string fullPath = Path.Combine(configuration.Destination, relativePath);
+            File.Copy(fullPath, configuration.Destination, true);
         }
 
-        private static void OnCreated(object sender, FileSystemEventArgs e)
+        private static void OnCreated(object sender, FileSystemEventArgs e, ConfigurationFile configuration)
         {
-            Console.WriteLine($"File created: {e.FullPath}");
+            string relativePath = Path.GetRelativePath(configuration.Destination, e.FullPath);
+            string fullPath = Path.Combine(configuration.Destination, relativePath);
+            File.Copy(fullPath, configuration.Destination, true);
         }
 
-        private static void OnDeleted(object sender, FileSystemEventArgs e)
+        private static void OnDeleted(object sender, FileSystemEventArgs e, ConfigurationFile configuration)
         {
-            Console.WriteLine($"File deleted: {e.FullPath}");
+            string relativePath = Path.GetRelativePath(configuration.Destination, e.FullPath);
+            string fullPath = Path.Combine(configuration.Destination, relativePath);
+            File.Delete(fullPath);
         }
 
-        private static void OnRenamed(object sender, RenamedEventArgs e)
+        private static void OnRenamed(object sender, RenamedEventArgs e, ConfigurationFile configuration)
         {
-            Console.WriteLine($"File renamed from {e.OldFullPath} to {e.FullPath}");
+            string relativePath = Path.GetRelativePath(configuration.Destination, e.FullPath);
+            string fullPath = Path.Combine(configuration.Destination, relativePath);
+            File.Move(fullPath, Path.Combine(Path.GetDirectoryName(e.FullPath), e.Name));
+            Console.WriteLine($"File renamed from {e.OldFullPath} to {e.FullPath} -  {e.ChangeType}");
         }
     }
 }

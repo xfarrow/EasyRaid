@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EasyRaid")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1fba1ebc2229059c49853bc9420a461b4ad4c133")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ff82e1c1b438801db163be239e5edafa90aab61")]
 [assembly: System.Reflection.AssemblyProductAttribute("EasyRaid")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EasyRaid")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{D4CAAFB0-B038-475F-9483-36B3D024862E}|EasyRaid\\EasyRaid.csproj|solutionrelative:easyraid\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D4CAAFB0-B038-475F-9483-36B3D024862E}|EasyRaid\\EasyRaid.csproj|c:\\users\\alessandro\\documents\\github\\easyraid\\easyraid\\easyraid\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D4CAAFB0-B038-475F-9483-36B3D024862E}|EasyRaid\\EasyRaid.csproj|solutionrelative:easyraid\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D4CAAFB0-B038-475F-9483-36B3D024862E}|EasyRaid\\EasyRaid.csproj|c:\\users\\alessandro\\documents\\github\\easyraid\\easyraid\\easyraid\\commandlineoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D4CAAFB0-B038-475F-9483-36B3D024862E}|EasyRaid\\EasyRaid.csproj|solutionrelative:easyraid\\commandlineoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D4CAAFB0-B038-475F-9483-36B3D024862E}|EasyRaid\\EasyRaid.csproj|c:\\users\\alessandro\\documents\\github\\easyraid\\easyraid\\easyraid\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D4CAAFB0-B038-475F-9483-36B3D024862E}|EasyRaid\\EasyRaid.csproj|solutionrelative:easyraid\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "CommandLineOptions.cs",
               "DocumentMoniker": "C:\\Users\\Alessandro\\Documents\\GitHub\\EasyRaid\\EasyRaid\\EasyRaid\\CommandLineOptions.cs",
               "RelativeDocumentMoniker": "EasyRaid\\CommandLineOptions.cs",
@@ -47,7 +47,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Configuration.cs",
               "DocumentMoniker": "C:\\Users\\Alessandro\\Documents\\GitHub\\EasyRaid\\EasyRaid\\EasyRaid\\Configuration.cs",
               "RelativeDocumentMoniker": "EasyRaid\\Configuration.cs",
@@ -55,8 +55,7 @@
               "RelativeToolTip": "EasyRaid\\Configuration.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-06T09:36:33.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-06T09:36:33.644Z"
             },
             {
               "$type": "Document",
@@ -66,7 +65,7 @@
               "RelativeDocumentMoniker": "EasyRaid\\Program.cs",
               "ToolTip": "C:\\Users\\Alessandro\\Documents\\GitHub\\EasyRaid\\EasyRaid\\EasyRaid\\Program.cs",
               "RelativeToolTip": "EasyRaid\\Program.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAgwDAAAABXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAH8AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-06T09:30:59.617Z",
               "EditorCaption": ""
