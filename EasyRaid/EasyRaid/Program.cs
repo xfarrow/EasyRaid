@@ -23,11 +23,10 @@ namespace EasyRaid
                             "-h, --help\n" +
                             "\tDisplays this help information.\n\n" +
                             "-n, --new-config <SOURCE_PATH> <DESTINATION_PATH>\n" +
-                            "\tCreates a new configuration file called 'easyraid-config.json'\n" +
-                            "\tin the specified destination folder. Both source and destination\n" +
-                            "\tpaths are required\n\n" +
+                            "\tCreates a new configuration file.\n" +
+                            "\tBoth source and destination paths are required\n\n" +
                             "-c, --config <CONFIG_FILE_PATH>\n" +
-                            "\tLoads and prints an existing configuration file.");
+                            "\tLoads an existing configuration file.");
                         Environment.Exit(0); // Exit immediately
                     }
 
