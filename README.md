@@ -26,3 +26,15 @@ OPTIONS:
 
 **This piece of software is alpha-quality**
 
+## Correctness
+Let S = <s1, s2, ...,sn> be a sequence of operations. We must prove that whatever the sequence is, the program behaves correctly. We'll assume that every sequence containing only one element is correct (which means that every operation is implemented correctly when it's the only operation being executed).
+Therefore we just need to prove that every sequence of two elements is correct in order to prove the correctness of the algorithm.
+
+Each operation can be one of the following: C = (file/folder) has changed ; N = (file/folder) has been created ; D = (file/folder) has been deleted ; R = (file/folder) has been renamed. There are 12 different sequences we must prove that are correct:
+
+```
+(C, N), (C, D), (C, R),
+(N, C), (N, D), (N, R),
+(D, C), (D, N), (D, R),
+(R, N), (R, C), (R, D)
+```
