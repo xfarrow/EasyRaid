@@ -1,9 +1,23 @@
 # EasyRaid
 EasyRaid is a file based Raid1-like application. 
 
-It is useful in those conditions in which:
-* A proper Raid 1 is infeasible because the connection might be unreliable and therefore a desync raid is likely (e.g. non UASP-enabled USB enclosures)
-* A Snapraid system requires frequent syncs, meanwhile EasyRaid replicates changes immediately
+EasyRaid offers several advantages in situations where traditional RAID systems may fall short:
+* A proper Raid 1 is infeasible due to due to potential unreliable connections and therefore a desync is likely (e.g. non UASP-enabled USB enclosures)
+* Synching solutions such as rsync require frequent syncs in order to keep the changes up to date, meanwhile EasyRaid replicates changes immediately
+* Traditional RAID 1 implementatations, unlike EasyRaid, do not expose a transparent file system
+
+Meanwhile EasyRaid is not useful in those conditions in which
+* You want a block-level RAID
+* You want CoW
+* You want ECC correction / parity data
+* You need asynchronous synching
+* You prefer correctness and reliability (which should be the the main point to avoid this program altogether)
+
+## How does it work?
+EasyRaid is not a Raid application. It listens for Operating System notifications regarding changes on the file system and replicates those changes in the destination. For these reasons, EasyRaid is more like a script than a proper program.
+
+## Is it reliable?
+EasyRaid is not reliable. However, you can have a look at its code and its mathematical correctness.
 
 ## Synopsis
 ```
